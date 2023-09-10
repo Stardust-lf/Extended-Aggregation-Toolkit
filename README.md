@@ -1,2 +1,2 @@
 # Extended-KKH
-An extended plugin for KKH tookit
+An extended plugin for aggregation tookit
