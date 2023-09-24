@@ -5,8 +5,9 @@ from werkzeug.utils import secure_filename
 import os
 
 app = Flask(__name__)
+app.config['MAX_CONTENT_LENGTH'] = 16 * 1000 * 1000
 app.config['UPLOAD_FOLDER'] = './static'
-ALLOWED_EXTENSIONS = ['java']
+ALLOWED_EXTENSIONS = ['json','pdf']
 def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
@@ -47,3 +48,7 @@ def upload_file():
       <input type=submit value=Upload>
     </form>
     '''
+
+
+
+
