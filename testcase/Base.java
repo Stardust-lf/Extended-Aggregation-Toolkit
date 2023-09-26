@@ -1,7 +1,7 @@
 public class Sum {
     public int sumBetween(int a, int b) {
         if (b <= a) {
-            throw new IllegalArgumentException("a must be smaller than b");
+            throw new IllegalArgumentException("b must be greater than or equal to a");
         }
 
         int sum = 0;
