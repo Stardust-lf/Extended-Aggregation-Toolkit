@@ -29,10 +29,16 @@ import java.util.Objects;
 
 public class CalendarToolWindowFactory implements ToolWindowFactory, DumbAware {
 
+  private static CommandExcuter excuter = new CommandExcuter();
+
   @Override
   public void createToolWindowContent(@NotNull Project project, @NotNull ToolWindow toolWindow) {
-    CalendarToolWindowContent toolWindowContent = new CalendarToolWindowContent(project.getBasePath(), toolWindow);
-    Content content = ContentFactory.getInstance().createContent(toolWindowContent.getContentPanel(), "", false);
+     CalendarToolWindowContent toolWindowContent = new CalendarToolWindowContent(project.getBasePath(), toolWindow);
+    // Content content = ContentFactory.getInstance().createContent(toolWindowContent.getContentPanel(), "", false);
+    String path = project.getBasePath();
+    Content content = ContentFactory.getInstance().createContent(excuter.getComponent(), "", false);
+    // 设置 ToolWindow 显示的内容
+    toolWindow.getContentManager().addContent(content);
     toolWindow.getContentManager().addContent(content);
   }
 
@@ -48,11 +54,12 @@ public class CalendarToolWindowFactory implements ToolWindowFactory, DumbAware {
     private final JLabel currentTime = new JLabel();
 
     public CalendarToolWindowContent(String path, ToolWindow toolWindow) {
-      contentPanel.setLayout(new BorderLayout(0, 20));
-      contentPanel.setBorder(BorderFactory.createEmptyBorder(40, 0, 0, 0));
-      contentPanel.add(createCalendarPanel(), BorderLayout.PAGE_START);
-      contentPanel.add(createControlsPanel(path, toolWindow), BorderLayout.CENTER);
-      updateCurrentDateTime("");
+//      contentPanel.setLayout(new BorderLayout(0, 20));
+//      contentPanel.setBorder(BorderFactory.createEmptyBorder(40, 0, 0, 0));
+//      contentPanel.add(createCalendarPanel(), BorderLayout.PAGE_START);
+//      contentPanel.add(createControlsPanel(path, toolWindow), BorderLayout.CENTER);
+//      updateCurrentDateTime("");
+      excuter.setClickListener(e -> sporkMergeV3(path));
     }
 
     @NotNull
@@ -94,12 +101,16 @@ public class CalendarToolWindowFactory implements ToolWindowFactory, DumbAware {
       }
     }
 
-    private void sporkMergeV2() {
-      // Spoon3dmMerge.INSTANCE.merge(sources.base, sources.left, sources.right)
-      // Test.
+    String outputInfo = "";
+
+    private void print(String text) {
+      outputInfo += text;
+      excuter.setText(outputInfo);
     }
 
     private void sporkMergeV3(String path) {
+      path += "/testcase";
+      print("working derectory:" + path + "\n");
       ArrayList<String> cmds = new ArrayList<>();
       cmds.add("java -version");
       String cmd = "java -jar spork.jar Left.java Base.java Right.java";
@@ -127,6 +138,7 @@ public class CalendarToolWindowFactory implements ToolWindowFactory, DumbAware {
           @Override
           public void processTerminated(@NotNull ProcessEvent event) {
             ProcessListener.super.processTerminated(event);
+            print("运行结果:" + event.getExitCode());
             // System.out.println("process terminate");
           }
 
@@ -140,6 +152,7 @@ public class CalendarToolWindowFactory implements ToolWindowFactory, DumbAware {
           public void onTextAvailable(@NotNull ProcessEvent event, @NotNull Key outputType) {
             ProcessListener.super.onTextAvailable(event, outputType);
             if (event.getExitCode() == 0) {
+              print(event.getText());
               System.out.println(event.getText());
             } else {
               System.out.println("error:" + event.getText());

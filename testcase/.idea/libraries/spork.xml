@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="spork">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/spork.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
