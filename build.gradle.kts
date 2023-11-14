@@ -1,3 +1,4 @@
+import org.gradle.internal.impldep.bsh.commands.dir
 import org.jetbrains.changelog.Changelog
 import org.jetbrains.changelog.markdownToHTML
 
@@ -24,6 +25,14 @@ repositories {
 // Dependencies are managed with Gradle version catalog - read more: https://docs.gradle.org/current/userguide/platforms.html#sub:version-catalog
 dependencies {
 //    implementation(libs.annotations)
+    implementation("org.junit.jupiter:junit-jupiter:5.9.0")
+    implementation(files("D:\\spork\\target\\spork-0.5.0-SNAPSHOT.jar"))
+    implementation("info.picocli:picocli:4.6.3")
+    implementation("fr.inria.gforge.spoon:spoon-core:10.4.1")
+    implementation("fr.inria.gforge.spoon.labs:gumtree-spoon-ast-diff:1.46")
+    implementation("ch.qos.logback:logback-classic:1.4.11")
+    implementation("org.eclipse.jgit:org.eclipse.jgit:6.3.0.202209071007-r")
+    implementation("org.apache.commons:commons-exec:1.3")
 }
 
 // Set the JVM language level used to build the project. Use Java 11 for 2020.3+, and Java 17 for 2022.2+.
@@ -123,5 +132,9 @@ tasks {
         // Specify pre-release label to publish the plugin in a custom Release Channel automatically. Read more:
         // https://plugins.jetbrains.com/docs/intellij/deployment.html#specifying-a-release-channel
         channels = properties("pluginVersion").map { listOf(it.split('-').getOrElse(1) { "default" }.split('.').first()) }
+    }
+
+    test{
+        useJUnitPlatform()
     }
 }
