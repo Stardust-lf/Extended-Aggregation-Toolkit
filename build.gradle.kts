@@ -26,13 +26,13 @@ repositories {
 dependencies {
 //    implementation(libs.annotations)
     implementation("org.junit.jupiter:junit-jupiter:5.9.0")
-    implementation(files("D:\\spork\\target\\spork-0.5.0-SNAPSHOT.jar"))
     implementation("info.picocli:picocli:4.6.3")
     implementation("fr.inria.gforge.spoon:spoon-core:10.4.1")
     implementation("fr.inria.gforge.spoon.labs:gumtree-spoon-ast-diff:1.46")
     implementation("ch.qos.logback:logback-classic:1.4.11")
     implementation("org.eclipse.jgit:org.eclipse.jgit:6.3.0.202209071007-r")
     implementation("org.apache.commons:commons-exec:1.3")
+//    implementation("com.intellij:openapi:7.0.3")
 }
 
 // Set the JVM language level used to build the project. Use Java 11 for 2020.3+, and Java 17 for 2022.2+.
@@ -49,6 +49,7 @@ intellij {
     // Plugin Dependencies. Uses `platformPlugins` property from the gradle.properties file.
     plugins = properties("platformPlugins").map { it.split(',').map(String::trim).filter(String::isNotEmpty) }
 }
+
 
 // Configure Gradle Changelog Plugin - read more: https://github.com/JetBrains/gradle-changelog-plugin
 changelog {
@@ -72,7 +73,9 @@ koverReport {
         }
     }
 }
-
+tasks.withType<JavaExec> {
+    systemProperty("file.encoding", "utf-8")
+}
 tasks {
     wrapper {
         gradleVersion = properties("gradleVersion").get()
