@@ -1,7 +1,17 @@
 <configuration>
+    <property name="LOG_PATH" value="./log"/>
+    <property name="PATTERN"
+              value="%d{yyyy-MM-dd HH:mm:ss.SSS}|%thread|%-5level|%class|%method|%line|%msg%n"/>
+    <property name="CONSOLE_LOG_PATTERN"
+              value="%d{yyyy-MM-dd HH:mm:ss.SSS}|%thread|%-5level|%class|%method|%line|%msg%n|%X{userid}"/>
+    <contextName>logback</contextName>
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
             <pattern>%msg%n</pattern>
+        </encoder>
+        <encoder>
+            <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+            <charset>UTF-8</charset>
         </encoder>
     </appender>
     <root level="${root-level:-OFF}">
