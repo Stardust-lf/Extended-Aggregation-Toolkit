@@ -26,7 +26,7 @@ repositories {
 dependencies {
 //    implementation(libs.annotations)
     implementation("org.junit.jupiter:junit-jupiter:5.9.0")
-    implementation("info.picocli:picocli:4.6.3")
+    implementation("info.picocli:picocli:4.7.5")
     implementation("fr.inria.gforge.spoon:spoon-core:10.4.1")
     implementation("fr.inria.gforge.spoon.labs:gumtree-spoon-ast-diff:1.46")
     implementation("ch.qos.logback:logback-classic:1.4.11")
