@@ -1,0 +1,27 @@
+<!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
+<idea-plugin>
+    <id>com.github.mortlight.plugindemo</id>
+    <name>plugindemo Template</name>
+    <vendor>mortlight</vendor>
+    <idea-version since-build="222.3345.118"/>
+    <depends>com.intellij.modules.platform</depends>
+
+    <depends>com.intellij.modules.java</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <toolWindow factoryClass="com.github.mortlight.plugindemo.toolWindow.MainUIFactory" id="MergeTool" anchor="right"/>
+<!--        <projectConfigurable groupId="tools" displayName="Mybatis Generator Plus" id="Plugin.Demo"-->
+<!--                             instance="com.github.mortlight.plugindemo.setting.SettingConfigurable"/>-->
+    </extensions>
+
+<!--    <applicationListeners>-->
+<!--        <listener class="com.github.mortlight.plugindemo.listeners.MyApplicationActivationListener" topic="com.intellij.openapi.application.ApplicationActivationListener"/>-->
+<!--    </applicationListeners>-->
+    <actions>
+        <action id="main-action" class="com.github.mortlight.plugindemo.ui.MainUI"
+                text="Plugin demo"
+                description="plugin demo">/>
+        </action>
+
+    </actions>
+</idea-plugin>
