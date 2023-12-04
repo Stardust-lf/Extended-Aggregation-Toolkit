@@ -29,7 +29,7 @@ dependencies {
     implementation("info.picocli:picocli:4.6.3")
     implementation("fr.inria.gforge.spoon:spoon-core:10.4.1")
     implementation("fr.inria.gforge.spoon.labs:gumtree-spoon-ast-diff:1.46")
-    implementation("ch.qos.logback:logback-classic:1.4.11")
+    implementation("ch.qos.logback:logback-classic:1.4.14")
     implementation("org.eclipse.jgit:org.eclipse.jgit:6.3.0.202209071007-r")
     implementation("org.apache.commons:commons-exec:1.3")
 //    implementation("com.intellij:openapi:7.0.3")
